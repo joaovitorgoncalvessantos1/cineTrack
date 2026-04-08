@@ -1,0 +1,56 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  /* 🎬 BACKGROUND */
+  --bg-primary: #0e0e0e;
+  --bg-secondary: #1a1919;
+  --bg-card: #262626;
+
+  /* 📝 TEXT */
+  --text-primary: #ffffff;
+  --text-secondary: #adadad;
+  --text-muted: #767575;
+
+  /* 🔥 PRIMARY (destaque) */
+  --primary: #ff7a5c;
+  --primary-hover: #ff5c3c;
+
+  /* ⭐ ACCENT */
+  --accent-yellow: #ffd709;
+  --accent-orange: #fb923c;
+
+  /* 🎨 BORDER */
+  --border-color: #313131;
+
+  /* 🌫️ OVERLAY */
+  --overlay: rgba(0, 0, 0, 0.7);
+
+  /* 🟢 STATUS */
+  --success: #5cfd80;
+  --error: #650003;
+
+  /* 📏 BORDER RADIUS */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* 📐 SPACING */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+
+  /* 🌑 SHADOW */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+  --font: font-family: "Inter", sans-serif;
+}
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font);
+  
+}

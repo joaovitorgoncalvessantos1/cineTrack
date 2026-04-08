@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  color: var(--bg-secondary);
+
+  max-width: 500px;
+  margin: 20px auto;
+
+  align-items: center;
+}
+.container h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.imagem {
+  width: 140px;
+  border-radius: 12px;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.resenha {
+  word-break: break-word;
+  font-size: 14px;
+  margin-top: 5px;
+  color: #555;
+  line-height: 1.4;
+  display: -webkit-box;
+ 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.emocao {
+  text-align: center;
+  border-radius: 5px;
+  width: 30%;
+  background: #ff7a5c;
+  color: white;
+}
+
+/* BADGES */
+.badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #ff7a5c;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+}

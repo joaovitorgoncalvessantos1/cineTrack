@@ -1,0 +1,15 @@
+.container {
+
+    padding: 20px;
+}
+.container_btn{
+    padding: 10px;
+}
+.botao {
+  background-color: var(--primary);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+}
