@@ -6,8 +6,8 @@ import Container from "./components/Container/Container";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
-    const avaliacoes = JSON.parse(localStorage.getItem('avaliacoes')) || []
-    console.log('minha va' +avaliacoes)
+  const avaliacoes = JSON.parse(localStorage.getItem("avaliacoes")) || [];
+ 
 
   const [filmes, setFilmes] = useState([]);
   const imageBaseURL = "https://image.tmdb.org/t/p/";
@@ -31,7 +31,7 @@ function App() {
   console.log(filmes);
   return (
     <>
-    <Navbar></Navbar>
+      <Navbar></Navbar>
       <Container>
         {filmes.map((filme) => (
           <CardFilme
@@ -45,9 +45,6 @@ function App() {
           />
         ))}
       </Container>
-
-
-
     </>
   );
 }

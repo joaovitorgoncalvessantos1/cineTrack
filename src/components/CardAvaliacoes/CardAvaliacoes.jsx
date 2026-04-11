@@ -1,6 +1,10 @@
 import style from "./CardAvaliacoes.module.css";
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
-function CardAvaliacoes({ avaliacao }) {
+function CardAvaliacoes({ avaliacao,deletar,editar }) {
+
+ 
   return (
     <div className={style.container}>
       <img
@@ -9,7 +13,9 @@ function CardAvaliacoes({ avaliacao }) {
       />
 
       <div className={style.review}>
-        <h2>{avaliacao.titulo}</h2>
+        <div>
+          <h2>{avaliacao.titulo}</h2>
+        </div>
 
         <div className={style.info}>
           <p>⭐ {avaliacao.nota}</p>
@@ -20,9 +26,11 @@ function CardAvaliacoes({ avaliacao }) {
           </p>
         </div>
 
-        <p>{new Date(avaliacao.data).toLocaleDateString("pt-BR")}</p>
+        <div>
+          {" "}
+          <p>{new Date(avaliacao.data).toLocaleDateString("pt-BR")}</p>
+        </div>
 
-        {/* EMOÇÕES */}
         <div className={style.badges}>
           {avaliacao.emocoes?.map((emocao, index) => (
             <span key={index} className={style.badge}>
@@ -31,8 +39,19 @@ function CardAvaliacoes({ avaliacao }) {
           ))}
         </div>
 
-        {/* RESENHA */}
-        <p className={style.resenha}>{avaliacao.resenha}</p>
+        <div>
+          <p className={style.resenha}>{avaliacao.resenha}</p>
+        </div>
+
+<div className={style.actions}>
+  <button onClick={()=> editar(avaliacao.id)} title={avaliacao.title}>
+    <MdEdit />
+  </button>
+
+  <button onClick={() => deletar(avaliacao.id)}>
+    <MdDelete  />
+  </button>
+</div>
       </div>
     </div>
   );

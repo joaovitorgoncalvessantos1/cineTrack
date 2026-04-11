@@ -2,7 +2,6 @@ import styles from "./FormAvaliacao.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "../Input/Input";
 import { useForm } from "react-hook-form";
-
 import { useEffect, useState } from "react";
 
 function FormAvaliacao() {
@@ -10,42 +9,100 @@ function FormAvaliacao() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+const emocoesLista = [
+  "Feliz",
+  "Triste",
+  "Empolgado",
+  "Ansioso",
+  "Reflexivo",
+  "Chocado",
+  "Com medo",
+  "Tenso",
+  "Aliviado",
+  "Inspirado",
+  "Motivado",
+  "Confuso",
+  "Surpreso",
+  "Indignado",
+  "Apaixonado",
+  "Nostálgico",
+  "Curioso",
+  "Decepcionado",
+  "Impactado",
+  "Divertido",
+  "Entediado",
+  "Intrigado",
+  "Apreensivo",
+  "Eufórico",
+  "Comovido"
+];
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
-    async function buscarFilme() {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=6812781b2c4fa1feadbd90bfe8879f95&language=pt-BR`,
-        );
-        const data = await response.json();
-        setFilme(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    const lista = JSON.parse(localStorage.getItem("avaliacoes")) || [];
 
-    buscarFilme();
-  }, [id]);
+    const avaliacao = lista.find(item => item.id == id);
+
+    // 🔥 EDITAR
+    if (avaliacao) {
+      setFilme({
+        title: avaliacao.titulo,
+        poster_path: avaliacao.poster,
+      });
+
+      setTimeout(() => {
+        setValue("data", avaliacao.data);
+        setValue("nota", avaliacao.nota);
+        setValue("resenha", avaliacao.resenha);
+        setValue("recomendaria", avaliacao.recomendaria);
+        setValue("emocoes", avaliacao.emocoes || []);
+      }, 0);
+    } 
+    // 🔥 CRIAR
+    else if (id) {
+      async function buscarFilme() {
+        try {
+          const response = await fetch(
+            `https://api.themoviedb.org/3/movie/${id}?api_key=6812781b2c4fa1feadbd90bfe8879f95&language=pt-BR`
+          );
+          const data = await response.json();
+          setFilme(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      buscarFilme();
+    }
+  }, [id, setValue]);
 
   function aoSubmeter(data) {
-    const avaliacoes = {
-      id: Date.now(),
-      filmeId: id,
-      titulo: filme?.title,
-      poster: filme?.poster_path,
-      ...data,
-    };
+    const lista = JSON.parse(localStorage.getItem("avaliacoes")) || [];
 
-    console.log(avaliacoes);
+    if (lista.find(item => item.id == id)) {
+      const novaLista = lista.map(item =>
+        item.id == id ? { ...item, ...data } : item
+      );
 
-    const listaAvaliado = JSON.parse(localStorage.getItem("avaliacoes")) || [];
-    listaAvaliado.push(avaliacoes);
-    localStorage.setItem("avaliacoes", JSON.stringify(listaAvaliado));
+      localStorage.setItem("avaliacoes", JSON.stringify(novaLista));
+    } else {
+      const novaAvaliacao = {
+        id: Date.now(),
+        filmeId: id,
+        titulo: filme?.title,
+        poster: filme?.poster_path,
+        ...data,
+      };
+
+      lista.push(novaAvaliacao);
+      localStorage.setItem("avaliacoes", JSON.stringify(lista));
+    }
 
     navigate(-1);
   }
@@ -58,7 +115,9 @@ function FormAvaliacao() {
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit(aoSubmeter)}>
-        <h1 className={styles.title}>Avaliar Filme</h1>
+        <h1 className={styles.title}>
+         Avaliar filme
+        </h1>
 
         {filme && (
           <img
@@ -71,48 +130,53 @@ function FormAvaliacao() {
           {!filme ? <p>Carregando...</p> : <h2>{filme.title}</h2>}
         </div>
 
+        {/* DATA */}
         <div className={styles.field}>
           <label>Data</label>
-          <Input type="date" {...register("data", { required: true })} />
-          {errors.data?.type === "required" && (
-            <p className={styles.error}>Coloque a data que você assistiu</p>
+          <Input
+            type="date"
+            {...register("data", { required: "Data obrigatória" })}
+          />
+          {errors.data && (
+            <p className={styles.error}>{errors.data.message}</p>
           )}
         </div>
 
+        {/* NOTA */}
         <div className={styles.field}>
           <label>Nota</label>
           <Input
             type="number"
             {...register("nota", {
-              required: true,
-              min: 1,
-              max: 10,
+              required: "Nota obrigatória",
+              min: { value: 1, message: "Mínimo 1" },
+              max: { value: 10, message: "Máximo 10" },
             })}
           />
-          {errors.nota?.type === "required" && (
-            <p className={styles.error}>De uma nota de 0 a 10</p>
+          {errors.nota && (
+            <p className={styles.error}>{errors.nota.message}</p>
           )}
         </div>
 
+        {/* RESENHA */}
         <div className={styles.field}>
           <label>Sua resenha</label>
           <textarea
             className={styles.textarea}
-            {...register("resenha", { required: true, minLength: 10 })}
+            {...register("resenha", {
+              required: "Resenha obrigatória",
+              minLength: {
+                value: 10,
+                message: "Escreva pelo menos 10 caracteres",
+              },
+            })}
           />
-          {errors.resenha?.type === "required" && (
-            <p className={styles.error}>
-              Escreva sua resenha,com no minimo 10 caracteres
-            </p>
-          )}
-
-          {errors.resenha?.type === "minLength" && (
-            <p className={styles.error}>
-              Conta um pouco mais da sua experiência
-            </p>
+          {errors.resenha && (
+            <p className={styles.error}>{errors.resenha.message}</p>
           )}
         </div>
 
+        {/* RECOMENDARIA */}
         <div className={styles.field}>
           <label>Recomendaria?</label>
           <div className={styles.radioGroup}>
@@ -120,7 +184,9 @@ function FormAvaliacao() {
               <Input
                 type="radio"
                 value="sim"
-                {...register("recomendaria", { required: true })}
+                {...register("recomendaria", {
+                  required: "Selecione uma opção",
+                })}
               />
               Sim
             </label>
@@ -129,83 +195,45 @@ function FormAvaliacao() {
               <Input
                 type="radio"
                 value="nao"
-                {...register("recomendaria", { required: true })}
+                {...register("recomendaria", {
+                  required: "Selecione uma opção",
+                })}
               />
               Não
             </label>
-            {errors.recomendaria && (
-              <p className={styles.error}>Você recomendaria esse filme?</p>
-            )}
           </div>
-          <div className={styles.field}>
-            <label>Emoões</label>
 
-            <div className={styles.checkboxGroup}>
-              <label className={styles.checkbox}>
-                <input type="checkbox" value="Tédio" {...register("emocoes")} />
-                <span>Tédio</span>
-              </label>
-              <label className={styles.checkbox}>
-                <input
+          {errors.recomendaria && (
+            <p className={styles.error}>
+              {errors.recomendaria.message}
+            </p>
+          )}
+        </div>
+
+        {/* EMOÇÕES */}
+        <div className={styles.field}>
+          <label>Quais emoções esse filme te trouxe?</label>
+
+          <div className={styles.checkboxGroup}>
+            {emocoesLista.map((emocao) => (
+              <label key={emocao} className={styles.checkbox}>
+                <Input
                   type="checkbox"
-                  value="Alegria/Feliz"
-                  {...register("emocoes", { required: true })}
+                  value={emocao}
+                  {...register("emocoes", {
+                    validate: (value) =>
+                      value && value.length > 0 ||
+                      "Escolha pelo menos uma emoção",
+                  })}
                 />
-                <span>Alegria/Feliz</span>
+                <span>{emocao}</span>
               </label>
-              <label className={styles.checkbox}>
-                <input
-                  type="checkbox"
-                  value="Tristeza/Emotivo"
-                  {...register("emocoes", { required: true })}
-                />
-                <span>Tristeza/Emotivo</span>
-              </label>
-              <label className={styles.checkbox}>
-                <input
-                  type="checkbox"
-                  value="Medo/Tensão"
-                  {...register("emocoes", { required: true })}
-                />
-                <span>Medo/Tensão</span>
-              </label>
-              <label className={styles.checkbox}>
-                <input
-                  type="checkbox"
-                  value="Calma/Relaxante "
-                  {...register("emocoes", { required: true })}
-                />
-                <span>Calma/Relaxante </span>
-              </label>
-              <label className={styles.checkbox}>
-                <input
-                  type="checkbox"
-                  value="Nostalgia"
-                  {...register("emocoes", { required: true })}
-                />
-                <span>Nostalgia</span>
-              </label>
-              <label className={styles.checkbox}>
-                <input
-                  type="checkbox"
-                  value="Raiva/Fúria"
-                  {...register("emocoes", { required: true })}
-                />
-                <span>Raiva/Fúria</span>
-              </label>{" "}
-              <label className={styles.checkbox}>
-                <input
-                  type="checkbox"
-                  value="Desolado/Devastado"
-                  {...register("emocoes", { required: true })}
-                />
-                <span>Desolado/Devastado</span>
-              </label>
-              {errors.emocoes && (
-                <p className={styles.error}>Escolha pelo menos uma emoção</p>
-              )}
-            </div>
+            ))}
           </div>
+
+          {errors.emocoes && (
+            <p className={styles.error}>{errors.emocoes.message}</p>
+          )}
         </div>
 
         <button className={styles.submit} type="submit">
