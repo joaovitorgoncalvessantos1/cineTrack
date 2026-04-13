@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
 import style from "./Navbar.module.css";
 import logo from "./logo.png";
+import { useState } from "react";
 
-function Navbar() {
+function Navbar({onClick,onChange,value}) {
+
+  
+  
   return (
     <nav className={style.nav}>
       <div>
         <img width={200} src={logo} alt="logo" />
       </div>
-
+    <div  className={style.container_search}>
+      <input value={value}  type="search" name="search" id="search" onChange={onChange} placeholder="Digite o nome de um filme..."  className={style.search}/>
+      <button onClick={onClick} className={style.botao}>Pesquisar</button>
+    </div>
       <div>
         <ul className={style.ul}>
-          <li className={style.li}></li>
+         
           <li><Link to={'/memorias'}> Memorias</Link></li>
         </ul>
       </div>
