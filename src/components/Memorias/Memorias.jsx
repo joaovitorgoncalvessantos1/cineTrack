@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import CardAvaliacoes from "../CardAvaliacoes/CardAvaliacoes";
 import style from "./Memorias.module.css";
 import { useState } from "react";
+import EmptyState from "../EmptyState/EmptyState";
 function Memorias() {
 const [lista, setLista] = useState(
   JSON.parse(localStorage.getItem("avaliacoes")) || []
@@ -37,7 +38,7 @@ function editar(id){
       </div>
       <div className={style.container}>
         {lista.length === 0 ? (
-          <p>Nenhuma memória ainda </p>
+        <EmptyState/>
         ) : (
           lista.map((avaliacao) => (
             <CardAvaliacoes key={avaliacao.id} avaliacao={avaliacao} deletar={deletar} editar={editar} />
