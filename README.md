@@ -13,7 +13,7 @@ O layout do projeto foi desenvolvido com base em uma referência visual criada n
 🔗 Protótipo utilizado como inspiração:  
 https://stitch.withgoogle.com/projects/3184922868791046674
 
-Durante o desenvolvimento, o design foi adaptado para o ambiente de código (HTML, CSS e JavaScript), resultando em algumas simplificações e ajustes para melhor responsividade e implementação prática.
+Durante o desenvolvimento, o design foi adaptado para o ambiente de código , resultando em algumas simplificações e ajustes para melhor responsividade e implementação prática.
 
 ---
 
