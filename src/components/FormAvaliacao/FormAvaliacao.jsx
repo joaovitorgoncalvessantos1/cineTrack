@@ -3,6 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import Input from "../Input/Input";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
+
+import { Home } from "lucide-react";
 
 function FormAvaliacao() {
   const [filme, setFilme] = useState(null);
@@ -49,7 +52,7 @@ const emocoesLista = [
 
     const avaliacao = lista.find(item => item.id == id);
 
-    // 🔥 EDITAR
+  
     if (avaliacao) {
       setFilme({
         title: avaliacao.titulo,
@@ -64,7 +67,7 @@ const emocoesLista = [
         setValue("emocoes", avaliacao.emocoes || []);
       }, 0);
     } 
-    // 🔥 CRIAR
+ 
     else if (id) {
       async function buscarFilme() {
         try {
@@ -110,8 +113,8 @@ const emocoesLista = [
   return (
     <div className={styles.page}>
       <div className={styles.nav}>
-        <button onClick={() => navigate("/")}>🏠 Início</button>
-        <button onClick={() => navigate(-1)}>⬅ Voltar</button>
+        <button className={styles.icon} onClick={() => navigate("/")}><Home/></button>
+        <button className={styles.icon}  onClick={() => navigate(-1)}><ArrowLeft/></button>
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit(aoSubmeter)}>
@@ -130,7 +133,7 @@ const emocoesLista = [
           {!filme ? <p>Carregando...</p> : <h2>{filme.title}</h2>}
         </div>
 
-        {/* DATA */}
+   
         <div className={styles.field}>
           <label>Data</label>
           <Input
@@ -142,7 +145,7 @@ const emocoesLista = [
           )}
         </div>
 
-        {/* NOTA */}
+ 
         <div className={styles.field}>
           <label>Nota</label>
           <Input
@@ -158,7 +161,7 @@ const emocoesLista = [
           )}
         </div>
 
-        {/* RESENHA */}
+ 
         <div className={styles.field}>
           <label>Sua resenha</label>
           <textarea
@@ -176,7 +179,7 @@ const emocoesLista = [
           )}
         </div>
 
-        {/* RECOMENDARIA */}
+
         <div className={styles.field}>
           <label>Recomendaria?</label>
           <div className={styles.radioGroup}>
@@ -210,7 +213,7 @@ const emocoesLista = [
           )}
         </div>
 
-        {/* EMOÇÕES */}
+
         <div className={styles.field}>
           <label>Quais emoções esse filme te trouxe?</label>
 

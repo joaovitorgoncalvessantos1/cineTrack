@@ -28,7 +28,7 @@ function CardAvaliacoes({ avaliacao,deletar,editar }) {
 
         <div>
           {" "}
-          <p>{new Date(avaliacao.data).toLocaleDateString("pt-BR")}</p>
+          <p className={style.data}>{new Date(avaliacao.data).toLocaleDateString("pt-BR")}</p>
         </div>
 
         <div className={style.badges}>

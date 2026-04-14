@@ -1,6 +1,7 @@
 import React from "react";
 import style from './EmptyState.module.css'
 import { useNavigate } from "react-router-dom";
+import { Clapperboard } from "lucide-react";
 
 function EmptyState() {
       const navigate = useNavigate();
@@ -11,7 +12,7 @@ function EmptyState() {
     }
   return (
     <div className={style.container}>
-      <span>🎬</span>
+      <span><Clapperboard/></span>
 
       <h2>Sua coleção está vazia</h2>
 

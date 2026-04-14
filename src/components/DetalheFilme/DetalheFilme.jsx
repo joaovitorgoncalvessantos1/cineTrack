@@ -61,7 +61,8 @@ function DetalheFilme() {
 
                 <div className={style.meta}>
                   <span>{filme?.release_date?.split("-")[0]}</span>
-                  <span>⭐ {filme?.vote_average}</span>
+              <span>⭐ {filme?.vote_average?.toFixed(1)}</span>
+
                   <span className={style.time}>
                     {filme?.runtime > 0
                       ? `${Math.floor(filme.runtime / 60)}h ${filme.runtime % 60}m`

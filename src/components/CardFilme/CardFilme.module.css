@@ -44,7 +44,7 @@ box-shadow: rgba(109, 100, 100, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10p
 }
 
 .botao:hover {
-  background-color: var(--primary-hover); 
+  background: linear-gradient(135deg, #ff7b00d4, #ff4d00db);
   transform: translateY(-2px); 
  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }

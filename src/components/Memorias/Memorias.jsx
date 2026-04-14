@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import CardAvaliacoes from "../CardAvaliacoes/CardAvaliacoes";
 import style from "./Memorias.module.css";
 import { useState } from "react";

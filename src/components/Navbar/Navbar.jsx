@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
 import style from "./Navbar.module.css";
 import logo from "./logo.png";
-import { useState } from "react";
+import { Clapperboard } from "lucide-react";
 
 function Navbar({ onClick, onChange, value }) {
   return (
     <nav className={style.nav}>
+      
+      {/* LOGO */}
       <div>
         <img width={200} src={logo} alt="logo" />
       </div>
+
+      {/* SEARCH */}
       <div className={style.container_search}>
         <input
           value={value}
@@ -23,17 +27,23 @@ function Navbar({ onClick, onChange, value }) {
           Pesquisar
         </button>
       </div>
+
+     
       <div className={style.container_ul}>
         <ul className={style.ul}>
-                    <li>
-            <Link className={style.link} to={"/memorias"}> ⭐</Link>
+          <li>
+            <Link className={style.link} to={"/memorias"}>
+              <Clapperboard/>
+            </Link>
           </li>
           <li>
-            <Link className={style.link_principal} to={"/memorias"}> Colecão</Link>
+            <Link className={style.link_principal} to={"/memorias"}>
+              Coleção
+            </Link>
           </li>
-
         </ul>
       </div>
+
     </nav>
   );
 }
