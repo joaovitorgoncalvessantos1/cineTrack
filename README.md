@@ -13,6 +13,11 @@ O projeto simula uma experiência de produto real, semelhante ao IMDb ou Letterb
 👉 https://joaovitorgoncalvessantos1.github.io/cineTrack/
 
 ---
+## Previw
+![Preview do CineTrack](https://github.com/joaovitorgoncalvessantos1/cineTrack/blob/main/public/preview.png)
+
+
+---
 
 ## 🎯 Funcionalidades
 
