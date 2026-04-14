@@ -22,6 +22,7 @@ markdown
 ![React](https://shields.io)
 ![JavaScript](https://shields.io)
 ![CSS3](https://shields.io)
+![Vite](https://shields.io)
 ---
 
 ## 🎯 Funcionalidades
