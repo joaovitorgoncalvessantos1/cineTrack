@@ -18,12 +18,6 @@ O projeto simula uma experiência de produto real, semelhante ao IMDb ou Letterb
 
 
 ---
-markdown
-![React](https://shields.io)
-![JavaScript](https://shields.io)
-![CSS3](https://shields.io)
-![Vite](https://shields.io)
----
 
 ## 🎯 Funcionalidades
 
