@@ -4,7 +4,7 @@
 
 O CineTrack é uma aplicação web desenvolvida em React que permite aos usuários explorar filmes populares, visualizar informações detalhadas e criar avaliações pessoais salvas diretamente no navegador.
 
-O projeto simula uma experiência de produto real, semelhante ao IMDb ou Letterboxd, com foco em consumo de API, gerenciamento de estado e interface limpa.
+O projeto simula uma experiência de produto real, com foco em consumo de API, gerenciamento de estado e interface limpa.
 ---
 Design e Protótipo
 
